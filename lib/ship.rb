@@ -7,10 +7,6 @@ def initialize(name, length)
   @health = length
 
 end
-
-  # def ship
-  # end
-
   def sunk?
     if @health > 0
       false
