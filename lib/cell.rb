@@ -22,4 +22,15 @@ attr_reader :coordinate, :ship
   def fired_upon?
     @fired_upon
   end
+
+  def render
+    if !fired_upon
+      "."
+    else
+      "M"
+    end
+  end
+
+  #render likely will use if, elsif, and else statment
+  #to get the desired returns
 end
