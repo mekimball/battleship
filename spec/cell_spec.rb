@@ -1,5 +1,6 @@
 require './lib/ship'
 require './lib/cell'
+require 'pry'
 
 RSpec.describe Cell do
 
@@ -11,7 +12,6 @@ RSpec.describe Cell do
   it 'has coorinates' do
     cell = Cell.new("B4")
     expect(cell.coordinate).to eq("B4")
-    # p cell.ship
   end
 
 
@@ -28,4 +28,13 @@ RSpec.describe Cell do
     expect(cell.empty?).to eq(false)
   end
 
+  it 'can be fired upon' do
+    cell = Cell.new("B4")
+    cruiser = Ship.new("Cruiser", 3)
+    cell.place_ship(cruiser)
+    expect(cell.fired_upon?).to eq(false)
+    cell.fire_upon
+    expect(cell.fired_upon?).to eq(true)
+
+  end
 end
