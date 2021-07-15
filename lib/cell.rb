@@ -17,9 +17,13 @@ attr_reader :coordinate, :ship
 
   def fire_upon
     @fired_upon = true
+    @ship.hit
   end
 
   def fired_upon?
     @fired_upon
+  end
+
+  def render
   end
 end
