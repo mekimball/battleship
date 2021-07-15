@@ -7,14 +7,9 @@ def initialize(name, length)
   @name = name
   @length = length
   @health = length
-
 end
   def sunk?
-    if @health > 0
-      false
-    else
-      true
-    end
+    @health == 0
   end
 
   def hit

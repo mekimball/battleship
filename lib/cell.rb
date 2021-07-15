@@ -1,11 +1,11 @@
 require './lib/ship'
 
 class Cell
-attr_reader :coordinate, :ship
+attr_reader :coordinate, :ship, :fire
 
   def initialize(coordinate)
     @coordinate = coordinate
-    @fired_upon = false
+    @fire= false
   end
   def place_ship(ship)
     @ship = ship
@@ -15,15 +15,31 @@ attr_reader :coordinate, :ship
      @ship == nil
   end
 
-  def fire_upon
-    @fired_upon = true
-    @ship.hit
-  end
-
+   def fire_upon
+      if empty? == false
+        @ship.hit
+        @fire = true
+      else
+        @fire = true
+      end
+    end
+  
   def fired_upon?
-    @fired_upon
+    @fire
   end
 
-  def render
+  def render(reveal = false)
+    if reveal == true && !empty?
+      "S"
+    elsif fired_upon? && !empty? && !@ship.sunk?
+     "H"
+    elsif
+      fired_upon? && empty?
+     "M"
+    elsif fired_upon? && !empty? && @ship.sunk?
+    "X"
+   else
+     "."
+    end
   end
 end
