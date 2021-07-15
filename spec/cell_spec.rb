@@ -35,6 +35,6 @@ RSpec.describe Cell do
     expect(cell.fired_upon?).to eq(false)
     cell.fire_upon
     expect(cell.fired_upon?).to eq(true)
-
+    binding.pry
   end
 end
