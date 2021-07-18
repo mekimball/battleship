@@ -35,12 +35,14 @@ RSpec.describe Cell do
     expect(cell.fired_upon?).to eq(false)
     cell.fire_upon
     expect(cell.fired_upon?).to eq(true)
+
   end
 
   it 'can show us what has happened to a cell' do
     cell_1 = Cell.new("B4")
     cell_2 = Cell.new("C3")
     cruiser = Ship.new("Cruiser", 3)
+
     expect(cell_1.render).to eq(".")
     cell_1.fire_upon
     expect(cell_1.render).to eq("M")
