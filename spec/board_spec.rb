@@ -1,6 +1,6 @@
 require './lib/board'
 require './lib/ship'
-require './lib/cell'
+# require './lib/cell'
 
 require 'pry'
 
@@ -92,5 +92,12 @@ RSpec.describe Board do
     board.create_cell
     board.place(cruiser, ["A1", "A2", "A3"])
     expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+  end
+  xit "can show if a ship was hit" do
+    oard = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.create_cell
+    board.place(cruiser, ["A1", "A2", "A3"])
+
   end
 end
