@@ -23,7 +23,7 @@ attr_reader :coordinate, :ship, :fire
         @fire = true
       end
     end
-  
+
   def fired_upon?
     @fire
   end
@@ -32,14 +32,13 @@ attr_reader :coordinate, :ship, :fire
     if reveal == true && !empty?
       "S"
     elsif fired_upon? && !empty? && !@ship.sunk?
-     "H"
-    elsif
-      fired_upon? && empty?
-     "M"
+      "H"
+    elsif fired_upon? && empty?
+      "M"
     elsif fired_upon? && !empty? && @ship.sunk?
-    "X"
-   else
-     "."
+      "X"
+    else
+      "."
     end
   end
 end
