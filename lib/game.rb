@@ -28,71 +28,57 @@ class Game
 
     # require "pry"; binding.pry
     coordinates = []
-    3.times do
-    puts "Choose a coordinate for the Cruiser"
-    cell_test = gets.chomp.capitalize
+    puts "Choose your first coordinate for the Cruiser"
+    cell_test = gets.chomp
     while player_board.valid_coordinate?(cell_test) == false
       puts "Sorry try again"
       cell_test = gets.chomp
     end
     coordinates << cell_test
-  end
-  player_board.place(@cruiser, coordinates)
-    puts player_board.render(true)
-
-    coordinates = []
-    2.length.times do
-    puts "Choose a coordinate for the Submarine"
-    cell_test = gets.chomp.capitalize
-    while player_board.valid_coordinate?(cell_test) == false
-      puts "Sorry try again"
-      cell_test = gets.chomp
-    end
-    coordinates << cell_test
-  end
-  player_board.place(@submarine, coordinates)
-    puts player_board.render(true)
+    # require "pry"; binding.pry
 
     # require "pry"; binding.pry
-    #
-    # # require "pry"; binding.pry
-    # puts "Choose your second coordinate for the Cruiser"
-    # cell_test = gets.chomp
-    # while player_board.valid_coordinate?(cell_test) == false
-    #   puts "Sorry try again"
-    #   cell_test = gets.chomp
-    # end
-    # coordinates << cell_test
-    #
-    # puts "Choose your third coordinate for the Cruiser"
-    # cell_test = gets.chomp
-    # while player_board.valid_coordinate?(cell_test) == false
-    #   puts "Sorry try again"
-    #   cell_test = gets.chomp
-    # end
-    # coordinates << cell_test
-    # if player_board.valid_placement?(cruiser, coordinates) == false
-    #   puts "What the fuck is wrong with you? Try again"
-    #   player_board= Board.new
-    #   start_game
-    # end
+    puts "Choose your second coordinate for the Cruiser"
+    cell_test = gets.chomp
+    while player_board.valid_coordinate?(cell_test) == false
+      puts "Sorry try again"
+      cell_test = gets.chomp
+    end
+    coordinates << cell_test
 
+    puts "Choose your third coordinate for the Cruiser"
+    cell_test = gets.chomp
+    while player_board.valid_coordinate?(cell_test) == false
+      puts "Sorry try again"
+      cell_test = gets.chomp
+    end
+    coordinates << cell_test
     require "pry"; binding.pry
+    if player_board.valid_placement?(cruiser, coordinates) == false
+      puts "What the fuck is wrong with you? Try again"
+      start_game
+    end
+
+    # if player_board.valid_placement?(@cruiser, coordinates)
+    #   false
+    #   puts "try again"
+    # end
+    player_board.place(@cruiser, coordinates)
     puts "Your Board"
     puts player_board.render(true)
-    # puts "Computer Board"
-    # puts computer_board.render
+    puts "Computer Board"
+    puts computer_board.render
     # # require "pry"; binding.pry
-    # coordinates = []
-    # puts "Choose your first coordinate for the Submarine"
-    # coordinates << gets.chomp
-    # puts "Choose your second coordinate for the Submarine"
-    # coordinates << gets.chomp
-    # player_board.place(submarine, coordinates)
-    # puts "Your Board"
-    # puts player_board.render(true)
-    # puts "Computer Board"
-    # puts computer_board.render
+    coordinates = []
+    puts "Choose your first coordinate for the Submarine"
+    coordinates << gets.chomp
+    puts "Choose your second coordinate for the Submarine"
+    coordinates << gets.chomp
+    player_board.place(@submarine, coordinates)
+    puts "Your Board"
+    puts player_board.render(true)
+    puts "Computer Board"
+    puts computer_board.render
   end
 
   # def place
@@ -112,6 +98,6 @@ class Game
     elsif input /= "p"
       exit
     end
-    place
+    # place
   end
 end

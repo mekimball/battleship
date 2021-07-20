@@ -36,7 +36,7 @@ class Board
    end
   end
 
-  def valid_placement?(ship, coordinates)
+  def valid_placement?(ship,coordinates)
     letters =letters_map(coordinates)
     numbers =numbers_map(coordinates)
     if valid_size?(ship,coordinates) && availible(coordinates) && letters.uniq.count == 1 && numbers.each_cons(2).all? {|a,b| b == a + 1}
