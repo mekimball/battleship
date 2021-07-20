@@ -5,7 +5,8 @@ attr_reader :coordinate, :ship, :fire
 
   def initialize(coordinate)
     @coordinate = coordinate
-    @fire= false
+    @fire = false
+    @ship = nil
   end
   def place_ship(ship)
     @ship = ship

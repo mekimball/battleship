@@ -1,8 +1,10 @@
 require './lib/cell'
+require './lib/ship'
 
 class Board
 
-  attr_reader :cells, :rows, :columns, :interior
+  attr_reader :cells,:rows, :colums, :interior
+
 
   def initialize
     @cells = {}
@@ -20,32 +22,43 @@ class Board
     end
   end
 
-  def valid_coordinate?(cell)
-   @cells.include?(cell)
+  def valid_coordinate?(coordinate)
+   @cells.keys.include?(coordinate)
   end
 
-  def letters_map(coordinates)
-    coordinates.map do |coordinate|
-      coordinate[0].ord
+
+
+  def valid_cells?(coordinates)
+    coordinates.all? {|coordinate| valid_coordinate?(coordinate)}
+  end
+  def letters_consecutive?(coordinates)
+    letters =coordinates.map {|coordinate| coordinate[0]}
+      letters == (letters.first..letters.last).to_a
     end
-  end
 
-  def numbers_map(coordinates)
-    coordinates.map do |coordinate|
-      coordinate[1].to_i
+
+  def numbers_consecutive?(coordinates)
+    numbers = coordinates.map {|coordinate| coordinate[1]}
+      numbers == (numbers.first..numbers.last).to_a
    end
-  end
+   def consecutive_coordinates?(coordinates)
+     if coordinates.all? { |coordinate| coordinate[0] == coordinates.first[0]}
+       numbers_consecutive?(coordinates)
+     elsif coordinates.all? { |coordinate| coordinate[1] == coordinates.last[1]}
+       letters_consecutive?(coordinates)
+     else
+       false
+     end
+   end
+
+   def no(coordinates)
+     coordinates.all? {|coordinate| @cells[coordinate].empty?}
+   end
+
+
 
   def valid_placement?(ship,coordinates)
-    letters =letters_map(coordinates)
-    numbers =numbers_map(coordinates)
-    if valid_size?(ship,coordinates) && availible(coordinates) && letters.uniq.count == 1 && numbers.each_cons(2).all? {|a,b| b == a + 1}
-        true
-      elsif valid_size?(ship,coordinates) && availible(coordinates) && numbers.uniq.count == 1 && letters.each_cons(2).all? {|a,b| b == a + 1}
-        true
-      else
-        false
-    end
+    valid_size?(ship,coordinates) && consecutive_coordinates?(coordinates) && valid_cells?(coordinates) && no(coordinates)
   end
 
   def place (ship, coordinates)
@@ -54,13 +67,7 @@ class Board
     end
   end
 
-  def availible(coordinates)
-    #go through coordinates and will return true/false based off what we do to block
-    coordinates.all? do|coordinate|
-      #using the empty method created to determine if a ship if there or not, if all coords are empty then they are availible
-    @cells[coordinate].empty?
-    end
-  end
+
 
   def valid_size?(ship,coordinates)
     ship.length == coordinates.length
@@ -85,9 +92,7 @@ class Board
         board
       end
     end
-
-  end
-
+end
 
 #make helper size method
 #  def valid_size?(ship,coordinates)
