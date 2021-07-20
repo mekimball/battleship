@@ -5,6 +5,7 @@ class Board
 
   attr_reader :cells,:rows, :colums, :interior
 
+
   def initialize
     @cells = {}
     create_cell
