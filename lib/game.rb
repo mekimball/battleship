@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 require './lib/game'
 require './lib/board'
 require './lib/ship'
@@ -65,4 +63,3 @@ class Game
     # place
   end
 end
->>>>>>> 715bbb9dc435ada3c4c3b9847a192ebdaf6e357d
