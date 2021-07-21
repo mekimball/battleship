@@ -95,56 +95,41 @@ class Game
       game.start
     end
   end
-<<<<<<< HEAD
-=======
-  def results(board)
-  if board.cells[@shot].render(true) == "X"
-    puts "Ship has been sunk"
-  elsif board.cells[@shot].render(true) == "H"
-    puts "Has hit a ship"
-  elsif board.cells[@shot].render(true) == "M"
-    puts "Your shot missed"
-  else
-    " "
-  end
-  end
-
-def turn
-  puts "Choose a coordinate to fire upon."
-  @shot = gets.chomp.capitalize
-  @computer_board.cells[@shot].fire_upon
-  player_results(@computer_board)
-
-  @player_board.cells[@potential.shuffle.shift].fire_upon
-
-  # require "pry"; binding.pry
-  @computer_results(@player_board)
-  # until game_end
-end
-def player_results(board)
-if @player_board.cells[@shot].render == "X"
-  puts "Ship has been sunk"
-elsif @player_board.cells[@shot].render == "H"
-  puts "Shot on cell #{@shot} was a hit"
-elsif @player_board.cells[@shot].render == "M"
-  puts "Shot on cell #{@shot} was a miss"
-else
-  " "
-end
-end
-def computer_results(board)
-  if @player_board.cells[@shot].render == "X"
-    puts "Ship has been sunk"
-  elsif @player_board.cells[@shot].render == "H"
-    puts "Shot on #{@shot} was a hit!"
-  elsif @player_board.cells[@shot].render == "M"
-    puts "Shot on cell #{@shot} was a miss"
-  else
-    " "
-  end
-end
-# validate ship has been hit and sunk
->>>>>>> b980e60f396b399335a20b978cd6c31b1e799d6d
+#
+#   def results(board)
+#     if board.cells[@shot].render(true) == "X"
+#       puts "Ship has been sunk"
+#     elsif board.cells[@shot].render(true) == "H"
+#       puts "Has hit a ship"
+#     elsif board.cells[@shot].render(true) == "M"
+#       puts "Your shot missed"
+#     else
+#       " "
+#     end
+#   end
+#
+# def player_results(board)
+# if @player_board.cells[@shot].render == "X"
+#   puts "Ship has been sunk"
+# elsif @player_board.cells[@shot].render == "H"
+#   puts "Shot on cell #{@shot} was a hit"
+# elsif @player_board.cells[@shot].render == "M"
+#   puts "Shot on cell #{@shot} was a miss"
+# else
+#   " "
+# end
+# end
+# def computer_results(board)
+#   if @player_board.cells[@shot].render == "X"
+#     puts "Ship has been sunk"
+#   elsif @player_board.cells[@shot].render == "H"
+#     puts "Shot on #{@shot} was a hit!"
+#   elsif @player_board.cells[@shot].render == "M"
+#     puts "Shot on cell #{@shot} was a miss"
+#   else
+#     " "
+#   end
+# end
 
 
   def results(board)
@@ -167,19 +152,5 @@ end
       exit
     end
   end
-<<<<<<< HEAD
-end
-=======
-
-#
-def game_end
-if @ships.all? {|ship| ship.health == 0}
 end
 end
-end
-
-
-
-end
-
->>>>>>> b980e60f396b399335a20b978cd6c31b1e799d6d
