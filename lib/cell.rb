@@ -29,7 +29,7 @@ attr_reader :coordinate, :ship, :fire
   end
 
   def render(reveal = false)
-    if reveal == true && !empty?
+    if reveal == true && !empty? && !fired_upon?
       "S"
     elsif fired_upon? && !empty? && !@ship.sunk?
       "H"

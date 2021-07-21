@@ -33,13 +33,13 @@ class Game
         puts "Choose your coordinate for #{ship.name}"
         cell_test = gets.chomp.capitalize
         until @player_board.valid_coordinate?(cell_test)
-          puts "Sorry try again"
+          puts "Sorry try a valid coordinate"
           cell_test = gets.chomp.capitalize
         end
         coordinates << cell_test
       end
         unless @player_board.valid_placement?(ship, coordinates)
-          puts "What the fuck is wrong with you? Try again"
+          puts "What is wrong with you? Try again"
           start_game
         end
         @player_board.place(ship, coordinates)
@@ -72,8 +72,38 @@ class Game
     puts "Your Board"
     puts @player_board.render(true)
     puts "Computer Board"
-    puts @computer_board.render(true)
+    puts @computer_board.render
   end
+  def turn
+    puts "Choose a coordinate to fire upon."
+    @shot = gets.chomp.capitalize
+      until @player_board.valid_coordinate?(@shot)
+        puts "Sorry try again"
+        @shot = gets.chomp.capitalize
+      end
+    @computer_board.cells[@shot].fire_upon
+    @player_board.cells[@potential.shuffle.shift].fire_upon
+    # puts "Computer fired at #{@potential.shuffle.shift}."
+    # require "pry"; binding.pry
+    results(@computer_board)
+    results(@player_board)
+    if @submarine.health + @cruiser.health == 0
+      puts "Congrats you won!"
+      start
+    end
+  end
+  def results(board)
+  if board.cells[@shot].render(true) == "X"
+    puts "Ship has been sunk"
+  elsif board.cells[@shot].render(true) == "H"
+    puts "Has hit a ship"
+  elsif board.cells[@shot].render(true) == "M"
+    puts "Your shot missed"
+  else
+    " "
+  end
+  end
+
 def turn
   puts "Choose a coordinate to fire upon."
   @shot = gets.chomp.capitalize
@@ -81,6 +111,7 @@ def turn
   player_results(@computer_board)
 
   @player_board.cells[@potential.shuffle.shift].fire_upon
+
   # require "pry"; binding.pry
   @computer_results(@player_board)
   # until game_end
@@ -124,6 +155,7 @@ end
     end
     # place
   end
+
 #
 def game_end
 if @ships.all? {|ship| ship.health == 0}
@@ -134,3 +166,4 @@ end
 
 
 end
+
