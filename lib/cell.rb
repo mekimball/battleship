@@ -7,6 +7,7 @@ attr_reader :coordinate, :ship, :fire
     @coordinate = coordinate
     @fire= false
   end
+  
   def place_ship(ship)
     @ship = ship
   end
@@ -15,14 +16,14 @@ attr_reader :coordinate, :ship, :fire
      @ship == nil
   end
 
-   def fire_upon
+  def fire_upon
       if empty? == false
         @ship.hit
         @fire = true
       else
         @fire = true
       end
-    end
+  end
 
   def fired_upon?
     @fire
