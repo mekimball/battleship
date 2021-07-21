@@ -103,9 +103,42 @@ class Game
     " "
   end
   end
-  # require "pry"; binding.pry
-end
 
+def turn
+  puts "Choose a coordinate to fire upon."
+  @shot = gets.chomp.capitalize
+  @computer_board.cells[@shot].fire_upon
+  player_results(@computer_board)
+
+  @player_board.cells[@potential.shuffle.shift].fire_upon
+
+  # require "pry"; binding.pry
+  @computer_results(@player_board)
+  # until game_end
+end
+def player_results(board)
+if @player_board.cells[@shot].render == "X"
+  puts "Ship has been sunk"
+elsif @player_board.cells[@shot].render == "H"
+  puts "Shot on cell #{@shot} was a hit"
+elsif @player_board.cells[@shot].render == "M"
+  puts "Shot on cell #{@shot} was a miss"
+else
+  " "
+end
+end
+def computer_results(board)
+  if @player_board.cells[@shot].render == "X"
+    puts "Ship has been sunk"
+  elsif @player_board.cells[@shot].render == "H"
+    puts "Shot on #{@shot} was a hit!"
+  elsif @player_board.cells[@shot].render == "M"
+    puts "Shot on cell #{@shot} was a miss"
+  else
+    " "
+  end
+end
+# validate ship has been hit and sunk
 
 # require "pry"; binding.pry
 # require "pry"; binding.pry
@@ -115,8 +148,22 @@ end
     input = gets.chomp
     if input == "p"
       start_game
-    elsif input != "p"
+    until input != "P" || input !="Q"
+      puts "Please try again"
+
       exit
     end
     # place
   end
+
+#
+def game_end
+if @ships.all? {|ship| ship.health == 0}
+end
+end
+end
+
+
+
+end
+
