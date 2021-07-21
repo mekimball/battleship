@@ -95,6 +95,41 @@ class Game
       game.start
     end
   end
+#
+#   def results(board)
+#     if board.cells[@shot].render(true) == "X"
+#       puts "Ship has been sunk"
+#     elsif board.cells[@shot].render(true) == "H"
+#       puts "Has hit a ship"
+#     elsif board.cells[@shot].render(true) == "M"
+#       puts "Your shot missed"
+#     else
+#       " "
+#     end
+#   end
+#
+# def player_results(board)
+# if @player_board.cells[@shot].render == "X"
+#   puts "Ship has been sunk"
+# elsif @player_board.cells[@shot].render == "H"
+#   puts "Shot on cell #{@shot} was a hit"
+# elsif @player_board.cells[@shot].render == "M"
+#   puts "Shot on cell #{@shot} was a miss"
+# else
+#   " "
+# end
+# end
+# def computer_results(board)
+#   if @player_board.cells[@shot].render == "X"
+#     puts "Ship has been sunk"
+#   elsif @player_board.cells[@shot].render == "H"
+#     puts "Shot on #{@shot} was a hit!"
+#   elsif @player_board.cells[@shot].render == "M"
+#     puts "Shot on cell #{@shot} was a miss"
+#   else
+#     " "
+#   end
+# end
 
 
   def results(board)
@@ -111,8 +146,11 @@ class Game
     input = gets.chomp
     if input == "p"
       start_game
-    elsif input != "p"
+    until input != "P" || input !="Q"
+      puts "Please try again"
+
       exit
     end
   end
+end
 end
