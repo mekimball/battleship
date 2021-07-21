@@ -45,8 +45,11 @@ class Game
         @player_board.place(ship, coordinates)
     end
       comp_placement
-      10.times turn do
+      10.times do
         turn
+        puts "Your Board"
+        puts @player_board.render(true)
+        puts "Computer Board"
         puts @computer_board.render
       end
       require "pry"; binding.pry
@@ -60,7 +63,7 @@ class Game
     @computer_board.place(@submarine, samples)
 
 
-    potential = @computer_board.cells.keys
+    @potential = @computer_board.cells.keys
     samples = potential.sample(3)
     until @computer_board.valid_placement?(@cruiser, samples) do
       samples = potential.sample(3)
@@ -75,10 +78,12 @@ def turn
   puts "Choose a coordinate to fire upon."
   @shot = gets.chomp.capitalize
   @computer_board.cells[@shot].fire_upon
+  @player_board.cells[@potential.shuffle.shift].fire_upon
+  # require "pry"; binding.pry
 end
 
 
-require "pry"; binding.pry
+# require "pry"; binding.pry
 # require "pry"; binding.pry
 
 
