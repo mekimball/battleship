@@ -45,25 +45,40 @@ class Game
       end
       @player_board.place(ship, coordinates)
 
+      def computer_placement
+        @all_ships.each do |s|
+          name, len = s
+        potential = @computer_board.cells.keys
+        start = potential.sample
+        dir = rand(2)
+        others = [xy.dup]
+        (len - 1).times do
+        start(rand) == start(rand).next
+        others << xy.dup
+      end
+      puts "#{name}: #{others}"
+      cells -= others
+      p cells
+      @computer_board.place(ship, coordinates)
+    end
+  end
+  def comp_placement
+    potential = @computer_board.cells.keys
+    @samples = potential.sample(ship.length)
+    until @computer_board.valid_placement?(ship, samples) do
+      samples = potential.sample(ship.length)
+      p @samples
+  end
+  @computer_board.place(ship, @samples)
+  # @computer_board.comp_placement
+end
       # require "pry"; binding.pry
 
     end
 
-    def computer_keys
-      @computer_board.cells.keys
-    end
 
-    def computer_place_ships
-      potential = computer_keys
-      for ship_details in @all_ships do
-        until @computer_board.valid_placement?(ship, samples)
-          samples = potential.sample(ship.length)
-        end
-        @computer_board.place(ship, samples)
-        potential -= samples
-        puts @computer_board.render(true)
-      end
-    end
+
+
 
 
         #pick coordinates
@@ -73,27 +88,34 @@ class Game
         #where does this end up placing the ship
 
 
-      # @computer_board.cells.keys.sample(2)
-      # until computer_board.valid_placement?(ship,coordinates)
 
 
-
-      # until @computer_board.valid_placement?(ship,coordinates)
-
-    # puts "Your Board"
-    # puts @player_board.render(true)
-    # puts "Computer Board"
-    # puts @computer_board.render
 
 
     puts "Your Board"
     puts @player_board.render(true)
     puts "Computer Board"
     puts @computer_board.render(true)
-    require "pry"; binding.pry
+    # require "pry"; binding.pry
+    potential = @computer_board.cells.keys
+    samples = potential.sample(2)
+    until @computer_board.valid_placement?(@submarine, samples) do
+      samples = potential.sample(2)
+    end
+    @computer_board.place(@submarine, samples)
+    puts @computer_board.render(true)
 
-
+    potential = @computer_board.cells.keys
+    samples = potential.sample(3)
+    until @computer_board.valid_placement?(@cruiser, samples) do
+      samples = potential.sample(3)
+    end
+    @computer_board.place(@cruiser, samples)
+    puts @computer_board.render(true)
   end
+
+
+# require "pry"; binding.pry
 
 
   def user_input
